@@ -65,9 +65,12 @@ namespace demo.Service.Service
 
         
 
-        public SkillModel<T> GetSkillList(string search, int pageNumber, string sorting, Expression<Func<T, bool>> condition, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
+        public SkillModel<T> GetSkillList(string search, int pageNumber, string sorting, int pageSize, Expression<Func<T, bool>> condition, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
         {
-            int pageSize = 3;
+            if(pageSize == 1)
+            {
+                pageSize = 5;
+            }
             if (pageNumber == 0)
             {
                 pageNumber = 1;

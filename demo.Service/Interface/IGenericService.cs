@@ -21,6 +21,6 @@ namespace demo.Service.Interface
         public T FindDefaultEntity(Expression<Func<T, bool>> condition);
 
         public List<T> GetListData(Expression<Func<T, bool>> condition);
-        public SkillModel<T> GetSkillList(string search, int pageNumber, string sorting, Expression<Func<T, bool>> condition, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy);
+        public SkillModel<T> GetSkillList(string search, int pageNumber, string sorting,int pageSize, Expression<Func<T, bool>> condition, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy);
     }
 }

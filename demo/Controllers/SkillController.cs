@@ -68,11 +68,11 @@ namespace demo.Controllers
             return View("MissionSkill", skillCrud);
         }
 
-        public IActionResult SkillTable(string search, int pageNumber, int sorting)
+        public IActionResult SkillTable(string search, int pageNumber, int sorting, int pageSize)
         {
             //x => pageUtilities.searchSkill != null ? (x.SkillName.ToLower().Contains(pageUtilities.searchSkill.ToLower()) && x.DeletedDate == null) : (x.DeletedDate == null),
 
-            var skillList = _skillService.GetSkillList(search, pageNumber, search,
+            var skillList = _skillService.GetSkillList(search, pageNumber, search, pageSize,
                 skill => search != null ? (skill.SkillName.ToLower().Contains(search.ToLower())) :
                 (skill.Deleted_at == null),
                 q => sorting == 0 ? q.OrderBy(x => x.SkillName) : q.OrderByDescending(x => x.SkillName));

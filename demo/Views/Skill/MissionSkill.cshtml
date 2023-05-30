@@ -25,6 +25,13 @@
                 <img src="/images/search.png" alt="" />
                 <input id="searchSkillData" type="text" placeholder="Search" />
             </div>
+             @Html.DropDownList("Page Size", new SelectList(new[] {
+            new { Value = "5", Text = "5" },
+            new { Value = "10", Text = "10" },
+            new { Value = "20", Text = "20" },
+            }, "Value", "Text"),"Page Size", new {@id="pageSize",@placeholder="Page Size..." , @class = "form-select adminMissiontype", style="width:15vw;" })
+
+
             @Html.DropDownList("Sort By", new SelectList(new[] {
             new { Value = "0", Text = "Name Ascending" },
             new { Value = "1", Text = "Name Descending" },
@@ -105,37 +112,13 @@
 
 <script>
 
-    //function listOfSkill(pageNumber){
-    //var search = $("#searchSkillData").val();
-    //if(search==null || search=="")
-    //{
-    //    search=sessionStorage.getItem("searchedtext");
-    //}
-    //if(pageNumber =='undefiend' || pageNumber=="" || pageNumber == 0 || pageNumber == null){
-    //    pageNumber = localStorage.getItem("pagings");
-    //}
-    //var sorting = $('#missionSortBy').val();
-    //$.ajax({
-    //type: 'GET',
-    //url: '/Skill/SkillTable',
-    //dataType: 'html',
-    //data: {sorting:sorting,search:search,pageNumber:pageNumber},
-    //success: function (data) {
-    //    if (data.length === 0 || data === null) {
-    //        localStorage.setItem("pagings",pageNumber-1);
-    //        listOfSkill(localStorage.getItem("pagings"));
-    //    }
-    //    else{
-    //        $('#skillTable').html("");
-    //        $('#skillTable').html(data);
-    //    }
-     
-    //},
-    //error: function (xhr, status, error) {
-    //console.log(error);
-    //}
-    //});
-    //}
+function storePageSize(pageSize) {
+localStorage.setItem('pageSize', pageSize);
+}
+
+function getStoredPageSize() {
+return localStorage.getItem('pageSize') || 1;
+}
 
     function listOfSkill(pageNumber) {
     var search = $("#searchSkillData").val();
@@ -146,17 +129,27 @@
         pageNumber = localStorage.getItem("pagings");
     }
     var sorting = $('#missionSortBy').val();
+    if(sorting == null || sorting == ""){
+        sorting = sessionStorage.getItem("sortBy");
+    }
+    var pageSize = getStoredPageSize();
+    
     $.ajax({
         type: 'GET',
         url: '/Skill/SkillTable',
         dataType: 'html',
-        data: { sorting: sorting, search: search, pageNumber: pageNumber },
+        data: { sorting: sorting, search: search, pageNumber: pageNumber, pageSize:pageSize },
         success: function (data) {
             if ($(data).find('tbody tr').length === 0) {
                 if (pageNumber > 1) {
                     localStorage.setItem("pagings", pageNumber - 1);
                     listOfSkill(localStorage.getItem("pagings"));
                 } 
+                else {
+                $('#skillTable').html("");
+                $('#skillTable').html(data);
+              
+            }
             } 
             else {
                 $('#skillTable').html("");
@@ -177,19 +170,31 @@
        
 
         $(document).ready(function () {
+            if(getStoredPageSize() != 1){
+                $('#pageSize').val(getStoredPageSize());
+            }
+            
+            $('#pageSize').on('change', function () {
+storePageSize($(this).val());
+listOfSkill();
+});
             
              $("#searchSkillData").val(sessionStorage.getItem("searchedtext"));
+             $("#missionSortBy").val(sessionStorage.getItem("sortBy"));
    
             listOfSkill(localStorage.getItem("pagings"));
+
     $('#missionSortBy').on('change', function () {
        sessionStorage.setItem("sortBy",$("#missionSortBy").val());
-    listOfSkill();
+    listOfSkill(localStorage.getItem("pagings"));
     });
 
     $("#searchSkillData").keyup(function() {
        sessionStorage.setItem("searchedtext",$("#searchSkillData").val());
-    listOfSkill();
+    listOfSkill(localStorage.getItem("pagings"));
     });
+
+    
 
 
 $('#hello').on('show.bs.modal', function (e) {
