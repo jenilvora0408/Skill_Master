@@ -1,0 +1,14 @@
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\bin\Debug\net6.0\demo.Entities.deps.json
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\bin\Debug\net6.0\demo.Entities.runtimeconfig.json
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\bin\Debug\net6.0\demo.Entities.dll
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\bin\Debug\net6.0\ref\demo.Entities.dll
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\bin\Debug\net6.0\demo.Entities.pdb
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\obj\Debug\net6.0\demo.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\obj\Debug\net6.0\demo.Entities.AssemblyInfoInputs.cache
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\obj\Debug\net6.0\demo.Entities.AssemblyInfo.cs
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\obj\Debug\net6.0\demo.Entities.csproj.CoreCompileInputs.cache
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\obj\Debug\net6.0\demo.Entities.dll
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\obj\Debug\net6.0\ref\demo.Entities.dll
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\obj\Debug\net6.0\demo.Entities.pdb
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\obj\Debug\net6.0\demo.Entities.genruntimeconfig.cache
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Entities\obj\Debug\net6.0\demo.Entities.csproj.AssemblyReference.cache

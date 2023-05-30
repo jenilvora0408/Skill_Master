@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "eed3c5cb-c932-4439-8998-de23fbbc7ad9": {
+      "ProjectGuid": "eed3c5cb-c932-4439-8998-de23fbbc7ad9",
+      "DisplayName": "demo",
+      "ColorIndex": 0
+    },
+    "87bd40bf-b4c7-4e5d-bf72-486e5eb37593": {
+      "ProjectGuid": "87bd40bf-b4c7-4e5d-bf72-486e5eb37593",
+      "DisplayName": "demo.Entities",
+      "ColorIndex": 1
+    },
+    "e7e68649-6597-48ea-b198-316a74912e1f": {
+      "ProjectGuid": "e7e68649-6597-48ea-b198-316a74912e1f",
+      "DisplayName": "demo.Models",
+      "ColorIndex": 2
+    },
+    "f88e8e01-fb9e-491a-9c34-57085e65ca67": {
+      "ProjectGuid": "f88e8e01-fb9e-491a-9c34-57085e65ca67",
+      "DisplayName": "demo.Repository",
+      "ColorIndex": 3
+    },
+    "f4aa4b7d-bb20-4839-a140-5bdb830f2e4f": {
+      "ProjectGuid": "f4aa4b7d-bb20-4839-a140-5bdb830f2e4f",
+      "DisplayName": "demo.Service",
+      "ColorIndex": 4
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 5
+}

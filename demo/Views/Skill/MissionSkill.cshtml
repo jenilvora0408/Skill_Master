@@ -1,0 +1,274 @@
+﻿@model demo.Entities.Models.Skill
+
+<div class="cms">
+    <!-- Navbar -->
+    <partial name="_AdminNavbar" />
+
+    <!-- Sidebar -->
+    <partial name="_AdminSidebar" />
+
+    <div class="cms-content">
+        @if (TempData["error"] != null)
+        {
+            <div id="successMessage" class="alert alert-danger">@TempData["error"]</div>
+            <script>
+                setTimeout(function() {
+                $('#successMessage').fadeOut('slow');
+                }, 5000);
+            </script>
+            @TempData.Remove("error")
+            ;
+        }
+        <p class="heading"><span>Mission Skill Page</span></p>
+        <div class="content-line mt-4">
+            <div class="search">
+                <img src="/images/search.png" alt="" />
+                <input id="searchSkillData" type="text" placeholder="Search" />
+            </div>
+            @Html.DropDownList("Sort By", new SelectList(new[] {
+            new { Value = "0", Text = "Name Ascending" },
+            new { Value = "1", Text = "Name Descending" },
+            }, "Value", "Text"),"Sort By", new {@id="missionSortBy" , @class = "form-select adminMissiontype", @placeholder="Sort By...", style="width:15vw;" })
+            <div class="add">
+                <button data-bs-toggle="modal" data-bs-target="#hello2" type="submit"><i class="bi bi-plus"></i> Add</button>
+            </div>
+        </div>
+        <div id="skillTable"></div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="hello2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Add Skill
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-action="AddSkill" asp-controller="Skill">
+
+                    <label>Skill</label>
+                    <input asp-for="@Model.SkillName" type="text" class="form-control m-0">
+                    <span asp-validation-for="@Model.SkillName" class="text-danger"></span>
+                    <br />
+
+                    <label class="">Status</label>
+                    @Html.DropDownListFor(model => Model.Status, new SelectList(new Dictionary<bool, string> { {false, "Inactive" }, {true, "Active"} }, "Key", "Value"), "Select status", new { @class = "form-control", @required="required" })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    <br />
+
+                    <div class="modalBtn" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <button id="cancel-mission-skill"
+                                style="padding: 8px 18px; border-radius: 23px; background: #fff; color: #333333; border: 2px solid #adadad;"
+                                type="reset">
+                            Cancel
+                        </button>
+                        <button id="DeleteBtn" style="padding: 8px 18px; border-radius: 23px; background: #fff; color: #f88634; border: 2px solid #f88634;"
+                                type="submit">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="hello" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Confirm Delete
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               
+                    <p class="fs-4" style="text-align: center;">Are you sure you want to delete this item?</p>
+                    <div class="modalBtn" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <button style="padding: 8px 18px; border-radius: 23px; background: #fff; color: #333333; border: 2px solid #adadad;" type="reset">Cancel</button>
+                        <button id="confirm-delete" style="padding: 8px 18px; border-radius: 23px; background: #fff; color: #f88634; border: 2px solid #f88634;" type="button">Delete</button>
+                    </div>
+              
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    //function listOfSkill(pageNumber){
+    //var search = $("#searchSkillData").val();
+    //if(search==null || search=="")
+    //{
+    //    search=sessionStorage.getItem("searchedtext");
+    //}
+    //if(pageNumber =='undefiend' || pageNumber=="" || pageNumber == 0 || pageNumber == null){
+    //    pageNumber = localStorage.getItem("pagings");
+    //}
+    //var sorting = $('#missionSortBy').val();
+    //$.ajax({
+    //type: 'GET',
+    //url: '/Skill/SkillTable',
+    //dataType: 'html',
+    //data: {sorting:sorting,search:search,pageNumber:pageNumber},
+    //success: function (data) {
+    //    if (data.length === 0 || data === null) {
+    //        localStorage.setItem("pagings",pageNumber-1);
+    //        listOfSkill(localStorage.getItem("pagings"));
+    //    }
+    //    else{
+    //        $('#skillTable').html("");
+    //        $('#skillTable').html(data);
+    //    }
+     
+    //},
+    //error: function (xhr, status, error) {
+    //console.log(error);
+    //}
+    //});
+    //}
+
+    function listOfSkill(pageNumber) {
+    var search = $("#searchSkillData").val();
+    if (search == null || search == "") {
+        search = sessionStorage.getItem("searchedtext");
+    }
+    if (pageNumber === 'undefined' || pageNumber === "" || pageNumber === 0 || pageNumber === null) {
+        pageNumber = localStorage.getItem("pagings");
+    }
+    var sorting = $('#missionSortBy').val();
+    $.ajax({
+        type: 'GET',
+        url: '/Skill/SkillTable',
+        dataType: 'html',
+        data: { sorting: sorting, search: search, pageNumber: pageNumber },
+        success: function (data) {
+            if ($(data).find('tbody tr').length === 0) {
+                if (pageNumber > 1) {
+                    localStorage.setItem("pagings", pageNumber - 1);
+                    listOfSkill(localStorage.getItem("pagings"));
+                } 
+            } 
+            else {
+                $('#skillTable').html("");
+                $('#skillTable').html(data);
+                localStorage.setItem("pagings", pageNumber);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        }
+    });
+}
+
+
+        $("#cancel-mission-skill").on("click", function(e){
+            window.location.href = "/Skill/MissionSkill";
+        })
+       
+
+        $(document).ready(function () {
+            
+             $("#searchSkillData").val(sessionStorage.getItem("searchedtext"));
+   
+            listOfSkill(localStorage.getItem("pagings"));
+    $('#missionSortBy').on('change', function () {
+       sessionStorage.setItem("sortBy",$("#missionSortBy").val());
+    listOfSkill();
+    });
+
+    $("#searchSkillData").keyup(function() {
+       sessionStorage.setItem("searchedtext",$("#searchSkillData").val());
+    listOfSkill();
+    });
+
+
+$('#hello').on('show.bs.modal', function (e) {
+                var userId = $(e.relatedTarget).data('id');
+               // $('.alert-Text').text("Skill");
+                $('#confirm-delete').attr('data-id', userId);
+            });
+//
+
+            // Color Change - Sidebar
+            $(".cms-sidebar ul li").on("mouseenter", function () {
+                $(this).find("i").css("color", "#F88634");
+                $(this).find("span").css("color", "#F88634");
+            });
+            $(".cms-sidebar ul li").on("mouseleave", function () {
+                if (!$(this).hasClass("active")) {
+                    $(this).find("i").css("color", "#fff");
+                    $(this).find("span").css("color", "#fff");
+                }
+            });
+            $(".cms-sidebar ul li").on("click", function () {
+                $(".cms-sidebar ul li").removeClass("active");
+                $(".cms-sidebar ul li i").css("color", "#fff");
+                $(".cms-sidebar ul li span").css("color", "#fff");
+                $(this).addClass("active");
+                $(this).find("i").css("color", "#F88634");
+                $(this).find("span").css("color", "#F88634");
+            });
+
+            // Hide & Show Sidebar
+            $("#sidebar-open").hide();
+            $("#sidebar-close").hide();
+
+            $(window).resize(function () {
+                if ($(window).width() < 960) {
+                    $(".cms-sidebar").hide();
+                    $("#sidebar-open").show();
+                    $("#sidebar-close").hide();
+                } else {
+                    $(".cms-sidebar").show();
+                    $("#sidebar-open").hide();
+                }
+            });
+        });
+        //
+        $('#confirm-delete').on('click', function (e) {
+            var hellos = $("#confirm-delete").attr("data-id");
+            $.ajax({
+                type: "POST",
+                url: "/Skill/DeleteSkill",
+                data: { skillName: hellos },
+                success: function (data) {
+                    //if (data.length === 0 || data === null) {
+                    //    var abcd = localStorage.getItem("pagings") - 1;
+                    //    localStorage.setItem("pagings",abcd);
+                    //    listOfSkill(localStorage.getItem("pagings"));
+                    //     $("#hello").modal('hide');
+                    //} 
+                    //else {
+                        listOfSkill(localStorage.getItem("pagings"));
+                        $("#hello").modal('hide');
+                   // }
+                },
+                error: function (xhr, status, error) {
+                    alert("Record Not Deleted.");
+                }
+            });
+        });
+    //
+        // Open & Close Button - Sidebar
+        $("#sidebar-open").on("click", function (e) {
+            $(".cms-sidebar").show();
+            $("#sidebar-open").hide();
+            $("#sidebar-close").show();
+        });
+
+        $("#sidebar-close").on("click", function (e) {
+            $(".cms-sidebar").hide();
+            $("#sidebar-close").hide();
+            $("#sidebar-open").show();
+        });
+</script>

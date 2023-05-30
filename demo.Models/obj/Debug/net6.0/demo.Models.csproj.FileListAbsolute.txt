@@ -1,0 +1,17 @@
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\bin\Debug\net6.0\demo.Models.deps.json
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\bin\Debug\net6.0\demo.Models.runtimeconfig.json
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\bin\Debug\net6.0\demo.Models.dll
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\bin\Debug\net6.0\ref\demo.Models.dll
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\bin\Debug\net6.0\demo.Models.pdb
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\bin\Debug\net6.0\demo.Entities.dll
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\bin\Debug\net6.0\demo.Entities.pdb
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\demo.Models.csproj.AssemblyReference.cache
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\demo.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\demo.Models.AssemblyInfoInputs.cache
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\demo.Models.AssemblyInfo.cs
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\demo.Models.csproj.CoreCompileInputs.cache
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\demo.Models.csproj.CopyComplete
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\demo.Models.dll
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\ref\demo.Models.dll
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\demo.Models.pdb
+C:\Users\tatva\Desktop\Project\Generic Repository\demo.Models\obj\Debug\net6.0\demo.Models.genruntimeconfig.cache
